@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Copy;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,15 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users');
             $table->timestamps();
         });
+
+        Copy::create([
+            'user_id' => 1,
+            'book_id' => 1
+        ]);
+        Copy::create([
+            'user_id' => 1,
+            'book_id' => 2
+        ]);
     }
 
     /**
