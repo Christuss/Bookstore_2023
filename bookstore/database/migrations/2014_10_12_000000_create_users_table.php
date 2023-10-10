@@ -18,14 +18,21 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('permission')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });
 
         User::create([
             'name' => 'Béla',
-            'email' => "asd@mail.hu",
-            'password' => 'asd'
+            'email' => "belabela@mail.hu",
+            'password' => 'Aa123456@'
+        ]);
+        User::create([
+            'name' => 'Könyvtáros',
+            'email' => "konyvtar@mail.hu",
+            'password' => 'Aa123456@',
+            'permission' => 0
         ]);
     }
 
@@ -37,3 +44,4 @@ return new class extends Migration
         Schema::dropIfExists('users');
     }
 };
+    
