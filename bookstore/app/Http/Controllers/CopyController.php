@@ -45,4 +45,9 @@ class CopyController extends Controller
         //még nem létezik...
         return redirect('/copy/list');
     }
+
+    public function bookCopy(){
+        $copies = Copy::with('copy')->get();
+        return $copies;
+    }
 }

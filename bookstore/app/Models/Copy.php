@@ -17,4 +17,8 @@ class Copy extends Model
         'hardcovered'
     ];
 
+    public function copy() {
+        return $this->hasMany(Copy::class, 'copy_id', 'copy_id');
+    }
+
 }

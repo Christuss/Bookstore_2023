@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lending;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LendingController extends Controller
 {
@@ -43,4 +45,11 @@ class LendingController extends Controller
         //még nem létezik...
         return redirect('/lending/list');
     }
+
+    public function filter(){
+        $user = Auth::user();
+        $lendings = Lending::with('copy')->where('user_id', '=', $user->id)->get();
+        return $lendings;
+    }
+
 }

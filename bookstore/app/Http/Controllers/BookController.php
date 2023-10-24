@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Copy;
+use App\Models\Lending;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -46,4 +49,22 @@ class BookController extends Controller
         $books = Book::all();
         return view('book.list', ['books' => $books]);
     }
+
+    public function bookCopy(){
+        $books = Book::with('copy')->get();
+        return $books;
+    }
+
+    public function showAll(){
+        $books = Book::with('copy')->get();
+
+        $user = Auth::user();
+        $lendings = Lending::with('copy')->where('user_id', '=', $user->id)->get();
+
+        $copies = Copy::with('copy')->get();
+        return $copies;
+
+        return [$books, $lendings, $copies];
+    }
+
 }

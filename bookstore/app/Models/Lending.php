@@ -23,4 +23,8 @@ class Lending extends Model
             ->where('start', '=', $this->getAttribute('start'));
         return $query;
     }
+
+    public function copy() {
+        return $this->hasMany(Copy::class, 'copy_id', 'copy_id');
+    }
 }
